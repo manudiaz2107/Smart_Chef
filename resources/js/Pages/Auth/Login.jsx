@@ -1,92 +1,117 @@
-import { Head, Link, useForm } from '@inertiajs/react';
+//import { Link } from '@inertiajs/react';
+import React, { useState } from 'react';
+import { useForm } from '@inertiajs/react';
 
-export default function Login({ status, canResetPassword }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
+export default function AuthCard() {
+    const [isLogin, setIsLogin] = useState(true); // Estado para controlar si muestra Login o Registro
+
+    const { data: loginData, setData: setLoginData, post: loginPost, processing: loginProcessing, errors: loginErrors } = useForm({
         email: '',
-        password_hash: '',
-        remember: false,
+        password: '',
     });
 
-    const submit = (e) => {
+    const { data: registerData, setData: setRegisterData, post: registerPost, processing: registerProcessing, errors: registerErrors } = useForm({
+        name: '',
+        email: '',
+        password: '',
+    });
+
+    const handleToggle = () => {
+        setIsLogin(!isLogin);
+    };
+
+    const handleLoginSubmit = (e) => {
         e.preventDefault();
-        post(route('login'), {
-            onFinish: () => reset('password_hash'),
-        });
+        loginPost(route('login'));
+    };
+
+    const handleRegisterSubmit = (e) => {
+        e.preventDefault();
+        registerPost(route('register'));
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-                <h1 className="text-2xl font-bold mb-6">Iniciar Sesión</h1>
+        <div className="wrapper min-h-screen flex items-center justify-center bg-gray-100">
+            <div className="card-switch relative">
+                <label className="switch">
+                    <input type="checkbox" className="toggle" checked={!isLogin} onChange={handleToggle} />
+                    <span className="slider"></span>
+                    <span className="card-side"></span>
+                    <div className={`flip-card__inner ${!isLogin ? 'flipped' : ''}`}>
+                        {/* Front: Login Form */}
+                        <div className="flip-card__front">
+                            <div className="title text-2xl font-bold mb-4">Iniciar Sesión</div>
+                            <form className="flip-card__form" onSubmit={handleLoginSubmit}>
+                                <input
+                                    className="flip-card__input block w-full px-4 py-3 mb-4 border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500"
+                                    type="email"
+                                    name="email"
+                                    placeholder="Correo Electrónico"
+                                    value={loginData.email}
+                                    onChange={(e) => setLoginData('email', e.target.value)}
+                                />
+                                {loginErrors.email && <p className="text-red-500 text-sm">{loginErrors.email}</p>}
+                                <input
+                                    className="flip-card__input block w-full px-4 py-3 mb-4 border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500"
+                                    type="password"
+                                    name="password"
+                                    placeholder="Contraseña"
+                                    value={loginData.password}
+                                    onChange={(e) => setLoginData('password', e.target.value)}
+                                />
+                                {loginErrors.password && <p className="text-red-500 text-sm">{loginErrors.password}</p>}
+                                <button
+                                    type="submit"
+                                    disabled={loginProcessing}
+                                    className="flip-card__btn w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition"
+                                >
+                                    ¡Vamos!
+                                </button>
+                            </form>
+                        </div>
 
-                {status && (
-                    <div className="mb-4 text-sm font-medium text-green-600">
-                        {status}
+                        {/* Back: Register Form */}
+                        <div className="flip-card__back">
+                            <div className="title text-2xl font-bold mb-4">Registrarse</div>
+                            <form className="flip-card__form" onSubmit={handleRegisterSubmit}>
+                                <input
+                                    className="flip-card__input block w-full px-4 py-3 mb-4 border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500"
+                                    type="text"
+                                    name="name"
+                                    placeholder="Nombre"
+                                    value={registerData.name}
+                                    onChange={(e) => setRegisterData('name', e.target.value)}
+                                />
+                                {registerErrors.name && <p className="text-red-500 text-sm">{registerErrors.name}</p>}
+                                <input
+                                    className="flip-card__input block w-full px-4 py-3 mb-4 border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500"
+                                    type="email"
+                                    name="email"
+                                    placeholder="Correo Electrónico"
+                                    value={registerData.email}
+                                    onChange={(e) => setRegisterData('email', e.target.value)}
+                                />
+                                {registerErrors.email && <p className="text-red-500 text-sm">{registerErrors.email}</p>}
+                                <input
+                                    className="flip-card__input block w-full px-4 py-3 mb-4 border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-indigo-500"
+                                    type="password"
+                                    name="password"
+                                    placeholder="Contraseña"
+                                    value={registerData.password}
+                                    onChange={(e) => setRegisterData('password', e.target.value)}
+                                />
+                                {registerErrors.password && <p className="text-red-500 text-sm">{registerErrors.password}</p>}
+                                <button
+                                    type="submit"
+                                    disabled={registerProcessing}
+                                    className="flip-card__btn w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition"
+                                >
+                                    Confirmar
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                )}
-
-                <form onSubmit={submit}>
-                    {/* Campo de Email */}
-                    <div className="mb-4">
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            value={data.email}
-                            onChange={(e) => setData('email', e.target.value)}
-                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-                            required
-                        />
-                        {errors.email && <p className="text-red-500">{errors.email}</p>}
-                    </div>
-
-                    {/* Campo de Contraseña */}
-                    <div className="mb-4">
-                        <label htmlFor="password_hash" className="block text-sm font-medium text-gray-700">
-                            Contraseña
-                        </label>
-                        <input
-                            type="password"
-                            id="password_hash"
-                            value={data.password_hash}
-                            onChange={(e) => setData('password_hash', e.target.value)}
-                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-                            required
-                        />
-                        {errors.password_hash && <p className="text-red-500">{errors.password_hash}</p>}
-                    </div>
-
-                    {/* Recordarme */}
-                    <div className="mb-4">
-                        <label className="flex items-center">
-                            <input
-                                type="checkbox"
-                                checked={data.remember}
-                                onChange={(e) => setData('remember', e.target.checked)}
-                                className="rounded border-gray-300 text-indigo-600 shadow-sm"
-                            />
-                            <span className="ml-2 text-sm text-gray-600">Recordarme</span>
-                        </label>
-                    </div>
-
-                    {/* Botón de Inicio de Sesión */}
-                    <div className="flex items-center justify-end">
-                        {canResetPassword && (
-                            <Link href={route('password.request')} className="text-sm text-gray-600 underline">
-                                ¿Olvidaste tu contraseña?
-                            </Link>
-                        )}
-                        <button
-                            type="submit"
-                            className="ml-4 inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150"
-                            disabled={processing}
-                        >
-                            Iniciar Sesión
-                        </button>
-                    </div>
-                </form>
+                </label>
             </div>
         </div>
     );

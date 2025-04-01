@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('username', 50)->unique('username');
             $table->string('email', 100)->unique('email');
             $table->string('password_hash')->nullable();
-            $table->string('profile_picture')->nullable();
             $table->integer('role_id')->index('role_id');
             $table->dateTime('created_at')->nullable()->useCurrent();
             $table->dateTime('updated_at')->useCurrentOnUpdate()->nullable()->useCurrent();

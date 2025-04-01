@@ -1,5 +1,6 @@
-import '../css/app.css';
-import './bootstrap';
+import '../css/app.css'; // Otros estilos globales
+import '../css/auth.css'; // Estilos específicos para autenticación
+//import './bootstrap';
 
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
