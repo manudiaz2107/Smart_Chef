@@ -1,0 +1,42 @@
+# Ignorar archivos sensibles
+.env*
+*.key
+/auth.json
+
+# Ignorar dependencias
+/vendor/
+/node_modules/
+
+# Ignorar archivos generados automáticamente
+.phpunit.result.cache
+composer.lock
+package-lock.json
+npm-debug.log
+yarn-error.log
+*.log
+
+# Ignorar cachés y temporales
+/.phpunit.cache
+/bootstrap/cache/*
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+
+# Ignorar archivos de IDEs y herramientas
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
+/.DS_Store
+Thumbs.db
+.editorconfig
+
+# Ignorar archivos de entornos de desarrollo
+Homestead.json
+Homestead.yaml

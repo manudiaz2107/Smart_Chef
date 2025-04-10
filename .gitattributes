@@ -1,0 +1,15 @@
+# Forzar la interpretación de archivos PHP
+*.php linguist-language=PHP
+
+# Ignorar archivos generados automáticamente
+*.blade.php linguist-language=html
+*.hack linguist-language=PHP
+*.txt linguist-generated=true
+*.json linguist-generated=true
+
+# Ignorar archivos grandes o irrelevantes
+/vendor/* linguist-vendored=true
+/storage/* linguist-generated=true
+/public/uploads/* linguist-generated=true
+
+

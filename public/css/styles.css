@@ -1,0 +1,160 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #E8F5E9;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.header .auth-buttons a {
+    margin-left: 1rem;
+    text-decoration: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid white;
+}
+
+.header .auth-buttons a.primary {
+    background-color: white;
+    color: #4CAF50;
+}
+
+.header .auth-buttons a.secondary {
+    background-color: transparent;
+    color: white;
+}
+
+.header .auth-buttons a:hover {
+    background-color: white;
+    color: #4CAF50;
+}
+
+.hero {
+    text-align: center;
+    padding: 4rem 1rem;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.hero .buttons a {
+    text-decoration: none;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    margin: 0 0.5rem;
+    font-weight: bold;
+}
+
+.hero .primary {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.hero .secondary {
+    background-color: white;
+    color: #4CAF50;
+}
+
+.hero .primary:hover {
+    background-color: #388E3C;
+}
+
+.hero .secondary:hover {
+    background-color: #f0f0f0;
+}
+
+.features {
+    padding: 4rem 1rem;
+    text-align: center;
+}
+
+.features h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.feature-cards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    text-align: center;
+}
+
+.card svg {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 1rem;
+    color: #4CAF50;
+}
+
+.card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.card p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Footer */
+.footer {
+    background-color: #388E3C;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.footer p {
+    margin-bottom: 0.5rem;
+}
+
+.footer .social-links a {
+    margin: 0 0.5rem;
+    text-decoration: none;
+    color: white;
+}
+
+.footer .social-links a:hover {
+    text-decoration: underline;
+}
